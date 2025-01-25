@@ -63,4 +63,26 @@ ItemRouter.post("/", auth, imagesUpload.single('image'), async (req , res,next )
     }
 });
 
+ItemRouter.delete("/:id", auth, async (req , res ) => {
+    const {id} = req.params;
+
+    const expressReq = req as RequestWithUser;
+    const user = expressReq.user;
+
+    const item = await Item.findById(id);
+
+    if(!item){
+        res.status(404).send({error: 'item not found'});
+        return;
+    }
+
+    if(item.salesman.toString() !== user._id.toString()) {
+        res.status(403).send({error: 'You cant delete this item!'});
+        return;
+    }
+
+    await Item.findByIdAndDelete(id);
+    res.status(200).send({ message: "Task deleted successfully" });
+});
+
 export default ItemRouter;
