@@ -1,6 +1,6 @@
 import { IItems } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
-import { addItem, getItems, getOneItem } from './itemsThunk.ts';
+import { addItem, deleteItem, getItems, getOneItem } from './itemsThunk.ts';
 import { RootState } from '../../app/store.ts';
 
 interface ItemsState {
@@ -12,6 +12,7 @@ interface ItemsState {
   addError: boolean;
   addItemLoading: boolean;
   getOneItemLoading: boolean;
+  deleteItemLoading: boolean;
 }
 
 const initialState: ItemsState = {
@@ -23,6 +24,7 @@ const initialState: ItemsState = {
   addItemLoading: false,
   addItemError: false,
   getOneItemLoading: false,
+  deleteItemLoading: false,
 }
 
 export const selectItems = (state: RootState) => state.items.items;
@@ -73,9 +75,19 @@ export const itemsSlice = createSlice({
       .addCase(getOneItem.rejected, (state) => {
         state.getOneItemLoading = false;
         state.error = true;
+      })
+
+      .addCase(deleteItem.pending, (state) => {
+        state.deleteItemLoading = true
+      })
+      .addCase(deleteItem.fulfilled, (state, { payload }) => {
+        state.items = state.items.filter(item => item._id !== payload);
+        state.deleteItemLoading = false;
+      })
+      .addCase(deleteItem.rejected, (state) => {
+        state.deleteItemLoading = false;
+        state.error = true;
       });
-
-
   }
 });
 

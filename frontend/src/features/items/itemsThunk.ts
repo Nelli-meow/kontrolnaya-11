@@ -36,3 +36,23 @@ export const getOneItem = createAsyncThunk<IItems, string>(
     console.log(response.data);
     return response.data;
   });
+
+export const deleteItem = createAsyncThunk(
+  'items/deleteItem',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        return rejectWithValue('Token is missing');
+      }
+
+      const response = await axiosApi.delete(`/items/${id}`, {
+        headers: { 'Authorization': `${token}` },
+      });
+
+      return response.data.id;
+    } catch (error) {
+      return (error);
+    }
+  }
+);

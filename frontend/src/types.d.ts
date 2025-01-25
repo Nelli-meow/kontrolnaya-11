@@ -61,7 +61,7 @@ export interface ItemMutation {
  }
 
 interface Salesman {
-  username: string;
+  _id: string;
   displayName: string;
   phoneNumber: string;
 }
