@@ -54,6 +54,12 @@ UsersRouter.post('/sessions', async (req, res) => {
             return;
         }
 
+        const phone = await User.findOne({phoneNumber: req.body.phoneNumber});
+        if (!phone) {
+            res.status(400).send({error:'Phone Not Found'});
+            return;
+        }
+
         user.generateToken();
         await user.save();
 

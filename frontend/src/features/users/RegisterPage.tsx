@@ -6,12 +6,16 @@ import { selectRegisterError } from './UsersSlice.ts';
 import { Link, useNavigate } from 'react-router-dom';
 import { register } from './UsersThunk.ts';
 import Header from '../../components /Header/Header.tsx';
-
+import { Avatar, Box, Button, Container, TextField, Typography } from '@mui/material';
+import VpnKeyOffIcon from '@mui/icons-material/VpnKeyOff';
+import Grid from '@mui/material/Grid2';
 
 
 const initialState = {
   username: '',
   password: '',
+  displayName: '',
+  phoneNumber: '',
 }
 
 const RegisterPage = () => {
@@ -22,6 +26,16 @@ const RegisterPage = () => {
 
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
+
+    if (name === 'phoneNumber') {
+
+      const phone = /^[+]?[0-9]*$/;
+
+      if (!phone.test(value)) {
+        alert('Phone number can only contain numbers and optional "+" at the beginning');
+        return;
+      }
+    }
 
     setForm(prev => ({ ...prev, [name]: value }));
   };
@@ -50,47 +64,92 @@ const RegisterPage = () => {
   return (
     <>
       <Header />
-      <div className="container">
-        <form onSubmit={onSubmit}>
-          <div className="d-flex flex-column align-items-center">
-            <h3 className="my-5">Sign Up</h3>
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <input
+      <Container>
+        <Box
+          sx={{
+            width: '40%',
+            margin: '20px auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: 'rgba(245,245,245,0.75)',
+            borderRadius: '10px',
+            padding: '30px 0',
+          }}>
+          <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+            <VpnKeyOffIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign Up
+          </Typography>
+          <Box component="form" noValidate onSubmit={onSubmit} sx={{mt: 3}}>
+            <Grid container direction={'column'} size={12} spacing={2}>
+              <TextField
+                fullWidth
                 id="username"
+                label="Username"
                 name="username"
                 value={form.username}
                 onChange={inputChange}
-                type="text"
-                className={`form-control ${getFiledError('username') ? 'is-invalid' : ''}`}
-                placeholder="Enter Username"
+                error={Boolean(getFiledError('username'))}
+                helperText={getFiledError('username')}
               />
-              {getFiledError('username') && (
-                <div className="invalid-feedback">{getFiledError('username')}</div>
-              )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
+            </Grid>
+            <Grid container direction={'column'} size={12} spacing={2} sx={{mt: 3,mb: 2}}>
+              <TextField
+                fullWidth
                 id="password"
+                label="Password"
                 name="password"
+                type="password"
                 value={form.password}
                 onChange={inputChange}
-                type="password"
-                className={`form-control ${getFiledError('password') ? 'is-invalid' : ''}`}
-                placeholder="Password"
+                error={Boolean(getFiledError('password'))}
+                helperText={getFiledError('password')}
               />
-              {getFiledError('password') && (
-                <div className="invalid-feedback">{getFiledError('password')}</div>
-              )}
-            </div>
-            <button type="submit" className="btn btn-primary mt-2">
-              Submit
-            </button>
-            <Link to="/login" className="mt-3">Already have an account? Sign in</Link>
-          </div>
-        </form>
-      </div>
+            </Grid>
+            <Grid container direction={'column'} size={12} spacing={2} sx={{mt: 3,mb: 2}}>
+              <TextField
+                fullWidth
+                id="displayName"
+                label="displayName"
+                name="displayName"
+                type="displayName"
+                value={form.displayName}
+                onChange={inputChange}
+                error={Boolean(getFiledError('displayName'))}
+                helperText={getFiledError('displayName')}
+              />
+            </Grid>
+            <Grid container direction={'column'} size={12} spacing={2} sx={{mt: 3,mb: 2}}>
+              <TextField
+                fullWidth
+                id="phoneNumber"
+                label="phoneNumber"
+                name="phoneNumber"
+                type="phoneNumber"
+                value={form.phoneNumber}
+                onChange={inputChange}
+                error={Boolean(getFiledError('phoneNumber'))}
+                helperText={getFiledError('phoneNumber')}
+              />
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{mt: 3,mb: 2}}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="center">
+              <Grid>
+                <Link to="/login">Already have an account? Sign in</Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
     </>
   );
 };

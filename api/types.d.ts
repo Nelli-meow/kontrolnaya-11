@@ -2,6 +2,6 @@ export interface UserFields {
     username: string;
     password: string;
     displayName: string;
-    phoneNumber: string;
+    phoneNumber: number;
     token: string;
 }

@@ -5,8 +5,6 @@ import LoginPage from './features/users/LoginPage.tsx';
 
 
 const App = () => {
-
-
   return (
     <>
       <Routes>
