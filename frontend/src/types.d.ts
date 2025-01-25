@@ -59,3 +59,18 @@ export interface ItemMutation {
   _id: string;
   name: string,
  }
+
+interface Salesman {
+  username: string;
+  displayName: string;
+  phoneNumber: string;
+}
+
+interface IItemFull {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+  salesman: Salesman;
+}

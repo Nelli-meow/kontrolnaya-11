@@ -21,13 +21,12 @@ ItemRouter.get("/:id", async (req , res ) => {
     try {
         const {id} = req.params;
 
-        const item = await Item.findById(id).populate("user");
+        const item = await Item.findById(id).populate("salesman", "username displayName phoneNumber");
 
         if(!item){
             res.status(404).send({error: 'item not found'});
             return;
         }
-
 
         res.status(200).send(item);
 

@@ -1,18 +1,21 @@
 import NoPic from '../../assets/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg';
 import { apiURL } from '../../globalConstants.ts';
-import { CardMedia, Typography } from '@mui/material';
+import { CardMedia, Typography,Button } from '@mui/material';
 import React from 'react';
 import { Card, CardContent } from '@mui/joy';
+import {  useNavigate } from 'react-router-dom';
 
 
 interface Props {
   title: string;
   image: string | null;
   price: number;
+  _id: string;
 }
 
-const ItemsItem: React.FC<Props> = ({image, title, price}) => {
+const ItemsItem: React.FC<Props> = ({image, title, price, _id}) => {
   const imageSrc = image ? `${apiURL}/${image}` : NoPic;
+  const navigate = useNavigate();
 
   return (
     <>
@@ -49,6 +52,7 @@ const ItemsItem: React.FC<Props> = ({image, title, price}) => {
           <Typography variant="body1" sx={{ fontSize: '16px', color: 'text.secondary' }}>
             ${price} USD
           </Typography>
+          <Button variant="text" onClick={() => navigate(`/items/${_id}`)} sx={{color: 'green', fontSize: '16px', display: 'flex', justifyContent: 'start', wordWrap: 'break-word', '&:hover': {color: 'rgb(49,172,239)'}, marginTop: '10px'}}>Read more...</Button>
         </CardContent>
       </Card>
     </>

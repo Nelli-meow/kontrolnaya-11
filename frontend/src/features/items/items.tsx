@@ -21,7 +21,7 @@ const Items = () => {
         <h2 className="text-center mt-5">All items</h2>
         {items.map((item) => (
           <Box key={item._id}>
-            <ItemsItem title={item.title} price={item.price} image={item.image}/>
+            <ItemsItem title={item.title} price={item.price} image={item.image} _id={item._id} />
           </Box>
         ))}
       </div>

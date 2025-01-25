@@ -28,3 +28,11 @@ export const addItem = createAsyncThunk<void, { item: ItemMutation, token: strin
     await axiosApi.post('/items', formData, { headers: { 'Authorization': token } });
   }
 );
+
+export const getOneItem = createAsyncThunk<IItems, string>(
+  'items/getOneItem',
+  async (itemId) => {
+    const response = await axiosApi<IItems>(`/items/${itemId}`);
+    console.log(response.data);
+    return response.data;
+  });
