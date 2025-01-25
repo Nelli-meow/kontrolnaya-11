@@ -9,9 +9,10 @@ export const ItemRouter = express.Router();
 
 ItemRouter.get("/", async (req , res ) => {
     try {
-        const items = await Item.find().populate("user");
+        const items = await Item.find().populate("salesman", "username").sort({ createdAt: -1 });;
+        console.log(items);
 
-        res.send(items);
+        res.status(200).send(items);
     } catch (error) {
         res.status(404).send({error: 'something went wrong :('});
     }

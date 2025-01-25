@@ -28,6 +28,8 @@ const ItemSchema = new Schema({
         ref: 'User',
         required: true,
     }
+}, {
+    timestamps: true,
 });
 
 const Item = mongoose.model('Item', ItemSchema);

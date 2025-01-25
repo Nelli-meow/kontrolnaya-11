@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '../../app/hooks.ts';
 import { unsetUser } from '../../features/users/UsersSlice.ts';
 
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../features/users/UsersThunk.ts';
 
 interface Props {
@@ -37,6 +37,12 @@ const UserMenu: React.FC<Props> = ({user}) => {
         color="inherit">
         Hello, {user.username}!
       </Button>
+      <Button
+        variant="outlined"
+        color={'inherit'}
+        to={'/items/addNewItem'}
+        component={NavLink}
+        sx={{margin: '0 20px'}}>Add new item</Button>
       <Menu
         anchorEl={anchorEl}
         keepMounted

@@ -2,6 +2,7 @@ import MainPage from './containers/MainPage.tsx';
 import { Route, Routes } from 'react-router-dom';
 import RegisterPage from './features/users/RegisterPage.tsx';
 import LoginPage from './features/users/LoginPage.tsx';
+import Items from './features/items/items.tsx';
 
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
         <Route path="/" element={<MainPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/login" element={<LoginPage/>} />
+        <Route path="/items" element={<Items/>} />
         <Route path="*" element={<p className="card-text my-5">Page is not  found</p>} />
       </Routes>
     </>

@@ -38,3 +38,13 @@ export interface GlobalError {
   error: string;
 }
 
+export interface IItems {
+  _id: string;
+  title: string,
+  description: string,
+  image: string | null,
+  price: number,
+  category: string,
+  salesman: string,
+}
+
