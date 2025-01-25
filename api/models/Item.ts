@@ -17,7 +17,6 @@ const ItemSchema = new Schema({
     },
     image: {
         type: String,
-        required: true,
     },
     category: {
         type: Schema.Types.ObjectId,

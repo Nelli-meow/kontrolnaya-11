@@ -61,7 +61,7 @@ ItemRouter.post("/", auth, imagesUpload.single('image'), async (req , res,next )
         const item = new Item({
             title: req.body.title,
             description: req.body.description,
-            image: req.body.image,
+            image: req.file ? 'images' + req.file.filename : null,
             price: req.body.price,
             category: category._id,
             salesman: saleMan._id,
