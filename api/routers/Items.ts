@@ -3,6 +3,7 @@ import Item from "../models/Item";
 import auth, {RequestWithUser} from "../middleware/auth";
 import mongoose from "mongoose";
 import {imagesUpload} from "../multer";
+import Category from "../models/Category";
 
 export const ItemRouter = express.Router();
 
@@ -44,12 +45,25 @@ ItemRouter.post("/", auth, imagesUpload.single('image'), async (req , res,next )
             return;
         }
 
+        const categoryName = req.body.category;
+        if (!categoryName) {
+            res.status(400).send({ error: 'Category name is required' });
+            return;
+        }
+
+        let category = await Category.findOne({ name: categoryName });
+
+        if (!category) {
+            category = new Category({ name: categoryName });
+            await category.save();
+        }
+
         const item = new Item({
             title: req.body.title,
             description: req.body.description,
             image: req.body.image,
             price: req.body.price,
-            category: req.body.category,
+            category: category._id,
             salesman: saleMan._id,
         });
 

@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import config from "./config";
 import Users from "./routers/Users";
 import ItemRouter from "./routers/Items";
+import CategoriesRouter from "./routers/Categories";
 
 const app = express();
 const port =  8000;
@@ -14,6 +15,7 @@ app.use(express.static('public'));
 
 app.use('/users', Users);
 app.use('/items', ItemRouter);
+app.use('/categories', CategoriesRouter);
 
 
 const run = async () => {
