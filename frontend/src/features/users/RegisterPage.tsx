@@ -27,16 +27,6 @@ const RegisterPage = () => {
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
 
-    if (name === 'phoneNumber') {
-
-      const phone = /^[+]?[0-9]*$/;
-
-      if (!phone.test(value)) {
-        alert('Phone number can only contain numbers and optional "+" at the beginning');
-        return;
-      }
-    }
-
     setForm(prev => ({ ...prev, [name]: value }));
   };
 

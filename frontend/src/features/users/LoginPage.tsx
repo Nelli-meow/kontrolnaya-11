@@ -28,16 +28,6 @@ const LoginPage = () => {
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
 
-    if (name === 'phoneNumber') {
-
-      const phone = /^[+]?[0-9]*$/;
-
-      if (!phone.test(value)) {
-        alert('Phone number can only contain numbers and optional "+" at the beginning');
-        return;
-      }
-    }
-
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
@@ -68,7 +58,7 @@ const LoginPage = () => {
           borderRadius: '10px',
           padding: '30px 0',
         }}>
-        <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+        <Avatar sx={{m: 1, backgroundColor: 'secondary.main'}}>
           <VpnKeyIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
