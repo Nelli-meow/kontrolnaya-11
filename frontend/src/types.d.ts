@@ -48,3 +48,14 @@ export interface IItems {
   salesman: string,
 }
 
+export interface ItemMutation {
+  title: string,
+  description: string,
+  image: string | null,
+  price: number,
+  category: string,
+}
+ export interface ICategories {
+  _id: string;
+  name: string,
+ }

@@ -10,10 +10,10 @@ const Items = () => {
   const dispatch = useAppDispatch();
   const items = useAppSelector(selectItems);
 
+
   useEffect(() => {
     dispatch(getItems());
   },[dispatch]);
-
 
   return (
     <>

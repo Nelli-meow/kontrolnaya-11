@@ -10,7 +10,6 @@ export const ItemRouter = express.Router();
 ItemRouter.get("/", async (req , res ) => {
     try {
         const items = await Item.find().populate("salesman", "username").sort({ createdAt: -1 });;
-        console.log(items);
 
         res.status(200).send(items);
     } catch (error) {
@@ -28,6 +27,7 @@ ItemRouter.get("/:id", async (req , res ) => {
             res.status(404).send({error: 'item not found'});
             return;
         }
+
 
         res.status(200).send(item);
 
@@ -62,7 +62,7 @@ ItemRouter.post("/", auth, imagesUpload.single('image'), async (req , res,next )
         const item = new Item({
             title: req.body.title,
             description: req.body.description,
-            image: req.file ? 'images' + req.file.filename : null,
+            image: req.file ? '/images/' + req.file.filename : null,
             price: req.body.price,
             category: category._id,
             salesman: saleMan._id,
